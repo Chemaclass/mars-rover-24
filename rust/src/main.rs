@@ -40,16 +40,18 @@ mod tests {
     use crate::{MarsRover, Position};
 
     #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
-
-    #[test]
     fn it_moves_1_position() {
         let mut rover = MarsRover::new();
         rover.exec_move("M");
         
         assert_eq!(Position {x:0, y: 1} , rover.position());
+    }
+
+    #[test]
+    fn it_moves_3_position() {
+        let mut rover = MarsRover::new();
+        rover.exec_move("MMM");
+        
+        assert_eq!(Position {x:0, y: 3} , rover.position());
     }
 }
