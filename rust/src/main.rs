@@ -27,6 +27,12 @@ impl MarsRover {
             "R" => {
                 self.bearing = Bearing::E;
             },
+            "RR" => {
+                self.bearing = Bearing::S;
+            },
+            "RRR" => {
+                self.bearing = Bearing::W;
+            },
             _ => {
                 self.position = Position {
                     x:0, 
@@ -82,5 +88,22 @@ mod tests {
         rover.exec_move("R");
         
         assert_eq!(MarsRover::new(Position {x:0, y: 0}, Bearing::E) , rover);
+    }
+
+    #[test]
+    fn it_rotates_right_twice() {
+        let mut rover = MarsRover::default();
+        rover.exec_move("RR");
+        
+        assert_eq!(MarsRover::new(Position {x:0, y: 0}, Bearing::S) , rover);
+    }
+
+
+    #[test]
+    fn it_rotates_right_three_times() {
+        let mut rover = MarsRover::default();
+        rover.exec_move("RRR");
+        
+        assert_eq!(MarsRover::new(Position {x:0, y: 0}, Bearing::W) , rover);
     }
 }
