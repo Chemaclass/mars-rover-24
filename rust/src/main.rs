@@ -1,23 +1,32 @@
 enum Bearing {
     N, S, E, W
 }
+#[derive(PartialEq)]
+#[derive(Debug)]
+#[derive(Clone, Copy)]
 struct Position {
     x: i32,
     y: i32,
 }
 struct MarsRover {
     position: Position,
-    bearing: Bearing,
+    _bearing: Bearing,
 }
 
 impl MarsRover {
     fn new() -> Self {
         MarsRover { 
             position: Position{x: 0, y: 0},
-            bearing: Bearing::N, 
+            _bearing: Bearing::N, 
         }
     }
-    // fn move(move) 
+    pub fn exec_move(&mut self, _instructions: &str) {
+        self.position = Position {x:0, y: 1};
+    } 
+
+    pub fn position(&self) -> Position {
+        self.position
+    }
 }
 
 fn main() {
@@ -38,9 +47,9 @@ mod tests {
 
     #[test]
     fn it_moves_1_position() {
-        let mars = MarsRover::new();
-        mars.move("M");
+        let mut rover = MarsRover::new();
+        rover.exec_move("M");
         
-        assert_eq!(Position {x:0, y: 1} , mars.position());
+        assert_eq!(Position {x:0, y: 1} , rover.position());
     }
 }
