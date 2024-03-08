@@ -10,14 +10,14 @@ struct Position {
 }
 struct MarsRover {
     position: Position,
-    _bearing: Bearing,
+    bearing: Bearing,
 }
 
 impl MarsRover {
-    fn new() -> Self {
+    fn new(position: Position, bearing: Bearing) -> Self {
         MarsRover { 
-            position: Position{x: 0, y: 0},
-            _bearing: Bearing::N, 
+            position,
+            bearing, 
         }
     }
     pub fn exec_move(&mut self, instructions: &str) {
@@ -26,6 +26,15 @@ impl MarsRover {
 
     pub fn position(&self) -> Position {
         self.position
+    }
+}
+
+impl Default for MarsRover {
+    fn default() -> MarsRover {
+        MarsRover { 
+            position: Position{x: 0, y: 0},
+            bearing: Bearing::N, 
+        }
     }
 }
 
@@ -41,7 +50,7 @@ mod tests {
 
     #[test]
     fn it_moves_1_position() {
-        let mut rover = MarsRover::new();
+        let mut rover = MarsRover::default();
         rover.exec_move("M");
         
         assert_eq!(Position {x:0, y: 1} , rover.position());
@@ -49,7 +58,7 @@ mod tests {
 
     #[test]
     fn it_moves_3_position() {
-        let mut rover = MarsRover::new();
+        let mut rover = MarsRover::default();
         rover.exec_move("MMM");
         
         assert_eq!(Position {x:0, y: 3} , rover.position());
