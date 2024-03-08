@@ -20,8 +20,8 @@ impl MarsRover {
             _bearing: Bearing::N, 
         }
     }
-    pub fn exec_move(&mut self, _instructions: &str) {
-        self.position = Position {x:0, y: 1};
+    pub fn exec_move(&mut self, instructions: &str) {
+        self.position = Position {x:0, y: instructions.len() as i32};
     } 
 
     pub fn position(&self) -> Position {
